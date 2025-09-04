@@ -1,0 +1,12 @@
+-- Logic --
+- user choices to enter R/P/S.
+- computer/bot choices the R/P/S.
+- user choices & bot choices calculated who's win.
+- print out the output value who's win.
+
+-- code logic --
+- user picks rock paper scissors
+- RPS / 3 from number between 0-1 (decimal)
+- r 1/3, p 2/3, s 3/3
+- user rps and bot rps are use lowercase string
+- Using Control Flow to calculate the value.
