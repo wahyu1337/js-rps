@@ -1,64 +1,125 @@
-console.log('hello world!');
-
-// var declare
-let result;
-
-const userInput = prompt('Picks: Rock, Paper, Scissor?', '').toLowerCase();
-console.log(`users pick ${userInput}`);
-
-function botChoice() {
-
-    bot = Math.floor(Math.random() * 3);
-
-    bot === 0 ? bot = 'rock' : bot === 1 ? bot ='paper' : bot === 2 ? bot = 'scissor' : console.error();
-    
-    console.log(`bot picks: ${bot}`);
-    return bot;
+console.log('RPS Game!');
+function getUserInput (){
+    let humanInput = prompt('Pick one: Rock, Paper, Scissor', '').toLowerCase();
+    console.log(`you picked ${humanInput}`);
+    return humanInput;
 }
 
-botChoice();
+function getComputerInput(){
+    let bot = (Math.floor(Math.random() * 3));
+    // bot picks betwwen rock, paper, and scissor
+    if ( bot === 0 ) {
+        bot = "rock";
+        console.log(`bot picked ${bot}`);
+        return bot;
+    } else if ( bot === 1 ) {
+        bot = "paper";
+        console.log(`bot picked ${bot}`);
+        return bot;
+    } else {
+        bot = "scissor";
+        console.log(`bot picked ${bot}`);
+        return bot;
+    }
+}
 
-function playRound(userInput, bot){
+function playGame(){
+    let humanScore = 0;
+    let computerScore = 0;
 
-    // user input = rock
-    (userInput === 'rock' && bot === 'rock') ? alert('tie') :
-    (userInput === 'rock' && bot === 'paper') ? alert('lose') :
-    (userInput === 'rock' && bot === 'scissor') ? alert('win') : console.error();
+    function playRound (humanChoice, botChoice) {
+        let result;
+        // Game logic (user = Rocks) & result saver
+        if (humanChoice === 'rock' && botChoice === 'rock') {
+            result = 'Tie';
+            console.log(result)
+            console.log('------------------------------------------')
+        } else if (humanChoice === 'rock' && botChoice === 'paper') {
+            result = 'Lose';
+            computerScore++;
+            console.log(result);
+            console.log(`score: human ${humanScore} - ${computerScore} computer`)
+            console.log('------------------------------------------')
+            return computerScore;  
+        } else if (humanChoice === 'rock' && botChoice === 'scissor') {
+            result = 'Win'
+            humanScore ++;
+            console.log(result)
+            console.log(`score: human ${humanScore} - ${computerScore} computer`)
+            console.log('------------------------------------------')
+            return humanScore;
+        }
 
-    // user input = paper
-    (userInput === 'paper' && bot === 'rock') ? alert('win') :
-    (userInput === 'paper' && bot === 'paper') ? alert('tie') :
-    (userInput === 'paper' && bot === 'scissor') ? alert('lose') : console.error();
+        // Game logic (user = paper)
+        if (humanChoice === 'paper' && botChoice === 'rock'){
+            result = 'Win';
+            humanScore++;
+            console.log(result);
+            console.log(`score: human ${humanScore} - ${computerScore} computer`)
+            console.log('------------------------------------------')
+            return humanScore;
+        } else if (humanChoice === 'paper' && botChoice === 'paper'){
+            result = 'Tie';
+            console.log(result);
+            console.log('------------------------------------------')
+        } else if (humanChoice === 'paper' && botChoice === 'scissor'){
+            computerScore ++;
+            result = 'Lose';
+            console.log(result);
+            console.log(`score: human ${humanScore} - ${computerScore} computer`)
+            console.log('------------------------------------------')
+            return computerScore;
+        }
 
-    // user input = scissor
-    (userInput === 'scissor' && bot === 'rock') ? alert('lose') : 
-    (userInput === 'scissor' && bot === 'paper') ? alert('win') : 
-    (userInput === 'scissor' && bot === 'scissor') ? alert('tie') : console.error();
+        // Gamelogic (user = scissor)
+        if (humanChoice === 'scissor' && botChoice ==='rock'){
+            result = 'Lose';
+            computerScore++;
+            console.log(result);
+            console.log(`score: human ${humanScore} - ${computerScore} computer`)
+            console.log('------------------------------------------')
+            return computerScore;
+        } else if (humanChoice === 'scissor' && botChoice === 'paper'){
+            result = 'Win';
+            humanScore++;
+            console.log(result);
+            console.log(`score: human ${humanScore} - ${computerScore} computer`)
+            console.log('------------------------------------------')
+            return humanScore;
+        } else if (humanChoice === 'scissor' && botChoice === 'scissor'){
+            result = 'Tie';
+            console.log(result);
+            console.log('------------------------------------------')
+        }
+    }
+   
+    let humanSelect = getUserInput();
+    let botSelect = getComputerInput();
+    //play round until 5
+    playRound(humanSelect, botSelect);
+    humanSelect = getUserInput();
+    botSelect = getComputerInput();
+    playRound(humanSelect, botSelect);
+    humanSelect = getUserInput();
+    botSelect = getComputerInput();
+    playRound(humanSelect, botSelect);
+    humanSelect = getUserInput();
+    botSelect = getComputerInput();
+    playRound(humanSelect, botSelect);
+    humanSelect = getUserInput();
+    botSelect = getComputerInput();
+    playRound(humanSelect, botSelect);
 
-    // --------------------------------------------------------------------------------//
+    // winner declare
+    if (humanScore > computerScore) {
+        console.log(`Congratulations you are the winner!`)
+    } else {
+        console.log(`You are losing, nice try!`)
+    }
+}  
 
-    // console result ( user as rock)
-    (userInput === 'rock' && bot === 'rock') ? result = 'tie' :
-    (userInput === 'rock' && bot === 'paper') ? result = 'lose' :
-    (userInput === 'rock' && bot === 'scissor') ? result = 'win' : console.error();
+playGame();
+//playRound(humanSelect, botSelect);
+// getComputerInput();
+// getUserInput();
 
-    // console result (user as paper)
-    (userInput === 'paper' && bot === 'rock') ? result = 'win' :
-    (userInput === 'paper' && bot === 'paper') ? result = 'tie' :
-    (userInput === 'paper' && bot === 'scissor') ? result = 'lose' : console.error();
-
-    // console result (user as scissor)
-    (userInput === 'scissor' && bot === 'rock') ? result = 'lose' :
-    (userInput === 'scissor' && bot === 'paper') ? result = 'win' :
-    (userInput === 'scissor' && bot === 'scissor') ? result = 'tie' : console.error();
-    console.log(`user: ${result}`);
-
-    console.log(`
-        user pick: ${userInput} 
-        bot pick: ${bot} 
-        result: user's ${result}
-        `);
-    return result;
-};
-
-playRound(userInput, bot);
